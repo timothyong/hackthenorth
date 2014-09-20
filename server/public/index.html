@@ -169,11 +169,15 @@ Leap.loop(controllerOptions, function(frame) {
         pointableString += "Classified as a finger<br />";
         pointablesData[i].classfication = "finger";
         pointableString += "Length: " + pointable.length.toFixed(1) + " mm<br />";
-        pointablesData[i].length = int(pointable.length);
+        pointablesData[i].length = pointable.length;
         pointableString += "Width: "  + pointable.width.toFixed(1) + " mm<br />";
-        pointablesData[i].width = pointable.width.toFixed(1);
+        pointablesData[i].width = pointable.width;
         pointableString += "Direction: " + vectorToString(pointable.direction, 2) + "<br />";
-        pointablesData[i].direction = vectorToString(pointable.direction, 2);
+        pointablesData[i].direction = [];
+        pointablesData[i].direction[0] = pointable.direction[0];
+        pointablesData[i].direction[1] = pointable.direction[1];
+        pointablesData[i].direction[2] = pointable.direction[2];
+        
         pointableString += "Extended?: "  + pointable.extended + "<br />";
         pointablesData[i].extended = pointable.extended;
         pointable.bones.forEach( function(bone){
@@ -181,30 +185,27 @@ Leap.loop(controllerOptions, function(frame) {
           pointableString += boneTypeMap[bone.type] + " bone <br />";
           pointablesData[i].bones.type = boneTypeMap[bone.type];
           pointableString += "Center: " + vectorToString(bone.center()) + "<br />";
-          pointablesData[i].bones.center = [];
-          pointablesData[i].bones.center[0] = bone.center()[0].toFixed(1);
-          pointablesData[i].bones.center[1] = bone.center()[1].toFixed(1);
-          pointablesData[i].bones.center[2] = bone.center()[2].toFixed(1);
+          pointablesData[i].bones.center = [bone.center()[0], bone.center()[1], bone.center()[2]];
           pointableString += "Direction: " + vectorToString(bone.direction()) + "<br />";
-          pointablesData[i].direction = [];
-          pointablesData[i].bones.direction[0] = bone.direction()[0].toFixed(1);
-          pointablesData[i].bones.direction[1] = bone.direction()[1].toFixed(1);
-          pointablesData[i].bones.direction[2] = bone.direction()[2].toFixed(1);
+          pointablesData[i].bones.direction = [];
+          pointablesData[i].bones.direction[0] = bone.direction()[0];
+          pointablesData[i].bones.direction[1] = bone.direction()[1];
+          pointablesData[i].bones.direction[2] = bone.direction()[2];
           pointableString += "Up vector: " + vectorToString(bone.basis[1]) + "<br />";
 	      pointablesData[i].bones.basis =  [];
-	      pointablesData[i].bones.basis = bone.basis[1][0];
-   	      pointablesData[i].bones.basis = bone.basis[1][1];
-	      pointablesData[i].bones.basis = bone.basis[1][2];
+	      pointablesData[i].bones.basis[0] = bone.basis[1][0];
+   	      pointablesData[i].bones.basis[1] = bone.basis[1][1];
+	      pointablesData[i].bones.basis[2] = bone.basis[1][2];
         });
 		pointablesData[i].tip = [];
         pointableString += "Tip position: " + vectorToString(pointable.tipPosition) + " mm<br />";
-        pointablesData[i].tip[0] = pointable.tipPosition[0].toFixed(1);
-    	pointablesData[i].tip[1] = pointable.tipPosition[1].toFixed(1);
-        pointablesData[i].tip[2] = pointable.tipPosition[2].toFixed(1);
+        pointablesData[i].tip[0] = pointable.tipPosition[0];
+    	pointablesData[i].tip[1] = pointable.tipPosition[1];
+        pointablesData[i].tip[2] = pointable.tipPosition[2];
         pointableString += "</div>";
       }
     }
-    socket.emit("pointable", pointablesData);
+    socket.emit("pointable", JSON.stringify(pointablesData));
   }
   else {
   	pointablesData = [];
