@@ -1,0 +1,32 @@
+//var socket = io.connect(); 
+
+// if we get an "info" emit from the socket server then console.log the data we recive
+//socket.on('info', function (data) {
+//    console.log(data);
+//});
+/*
+var WebSocket = require('ws');
+var ws = new WebSocket('ws://localhost:7204/myo/1');
+ws.on('message', function(message) {
+    json = JSON.parse(message);     
+    if (json[0] != "event")                                                                                                 
+	return console.log(message);                                                                                             
+    var data = json[1];                                                                                                          
+    if (data.type == "connected") {                                                                                              
+        myoID = data.myo;                                                                                                        
+        console.log(myoID);                                                                                                      
+  
+    }                                                                                                                            
+  
+
+                                                                                                                                  
+ 
+    if (data.type != "orientation") {                                                                                            
+  
+        console.log(data);                                                                                                       
+  
+    }
+
+    console.log('received: %s', message);
+});
+*/
