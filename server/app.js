@@ -22,16 +22,10 @@ app.configure(function(){
 
 // Routes
 
-app.get('/', function(req, res){
-	res.send("blah", 200);
-});
-
 io.listen(app);
 io.sockets.on('connection', function (socket) {
-    console.log('New user connected!');
-    socket.emit('info', { msg: 'What up bro?' });
-    socket.on('clientstuff', function (data) {
-	console.log(data);
+    socket.on('myo', function (data) {
+	console.log(data);	
     });
 });
 
