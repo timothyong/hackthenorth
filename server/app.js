@@ -3,9 +3,7 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http');
+var express = require('express');
 
 var app = module.exports = express.createServer();
 var server = app.listen(3000);
@@ -25,7 +23,7 @@ app.configure(function(){
 // Routes
 
 app.get('/', function(req, res){
-	res.send("yo", 200);
+	res.send("blah", 200);
 });
 
 io.listen(app);
