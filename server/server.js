@@ -13,9 +13,9 @@ app.use(express.static(__dirname + "/public"));
 
 io.sockets.on('connection', function(socket){
 	socket.on('pointable', function(leap){
-		console.log(leap);
+		console.log(JSON.parse(leap));
 	});
 	ws.on('message', function(myo){
-		console.log(myo);
+//		console.log(JSON.parse(myo));
 	});
 });
